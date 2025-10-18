@@ -1,20 +1,21 @@
-﻿using Tyuiu.DolganovAV.Sprint4.Task4.V2.Lib;
+﻿using Tyuiu.DolganovAV.Sprint4.Task5.V25.Lib;
 internal class Program
 {
     private static void Main(string[] args)
     {
+        Random rnd = new Random();
         DataService ds = new DataService();
         Console.Title = "Спринт #4 | Выполнил: Долганов А. В. | ПИНб-25-1";
         Console.WriteLine("***************************************************************************");
         Console.WriteLine("* Спринт #4                                                               *");
-        Console.WriteLine("* Тема: Двумерные массивы (ввод с клавиатуры)                              *");
-        Console.WriteLine("* Задание #4                                                              *");
-        Console.WriteLine("* Вариант #2                                                              *");
+        Console.WriteLine("* Тема: Двумерные массивы (генератор случайных чисел)                     *");
+        Console.WriteLine("* Задание #5                                                              *");
+        Console.WriteLine("* Вариант #25                                                             *");
         Console.WriteLine("* Выполнил: Долганов Александр Витальевич | ПИНб-25-1                     *");
         Console.WriteLine("***************************************************************************");
         Console.WriteLine("* УСЛОВИЕ:                                                                *");
-        Console.WriteLine("* Написать программу, которая подсчитывает произведение элементов первого *");
-        Console.WriteLine("* столбца в массиве 5 на 5, заполененный значениями от 5 до 9             *");
+        Console.WriteLine("* Написать программу, которая подсчитывает сумму положительных элементов  *");
+        Console.WriteLine("* массива 5 на 5 со случайными значениями в диапазоне от -4 до 3          *");
         Console.WriteLine("*                                                                         *");
         Console.WriteLine("***************************************************************************");
         Console.WriteLine("* ИСХОДНЫЕ ДАННЫЕ:                                                        *");
@@ -28,40 +29,30 @@ internal class Program
 
         int[,] matrix = new int[rows, cols];
 
-        for (int i = 0; i < rows; i++)
+        for (int i = 0;  i < rows; i++)
         {
-            for (int j = 0; j < cols; j++)
+            for (int j = 0;  j < cols; j++)
             {
-                Console.Write($"Введите {i},{j} элемент массива: ");
-                matrix[i, j] = Convert.ToInt32(Console.ReadLine());
+                matrix[i, j] = rnd.Next(-4, 3);
             }
         }
 
-        Console.WriteLine("\nМассив:");
+        Console.WriteLine("Массив:");
         for (int i = 0; i < rows; i++)
         {
-            for (int j = 0; j < cols; j++)
+            for (int j = 0;j < cols; j++)
             {
-                Console.Write($"{matrix[i, j]} \t");
+                Console.Write(matrix[i, j] + "\t");
             }
             Console.WriteLine();
         }
 
-        Console.WriteLine();
         Console.WriteLine("***************************************************************************");
         Console.WriteLine("* РЕЗУЛЬТАТ:                                                              *");
         Console.WriteLine("***************************************************************************");
 
         var res = ds.Calculate(matrix);
-        for (int i = 0; i < res.GetLength(0); i++)
-        {
-            for (int j = 0; j < res.GetLength(1); j++)
-            {
-                Console.Write($"{matrix[i, j]} \t");
-            }
-            Console.WriteLine();
-        }
-
-        Console.ReadKey();
+        Console.WriteLine($"Сумма всех положительных элементов массива: {res}");
+        Console.ReadLine();
     }
 }
